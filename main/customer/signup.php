@@ -26,10 +26,10 @@ try {
     $response = create_response();
 } catch (\PDOException $th) {
     $response = create_response($th);
-    if ($pdo_th->getCode() == '23000') {
+    if ($th->getCode() == '23000') {
         $response['message'] = '该手机号已被注册';
     } else {
-        $response['message'] = $pdo_th->getMessage();
+        $response['message'] = $th->getMessage();
     }
 } catch (Exception $th) {
     $response = create_response($th);

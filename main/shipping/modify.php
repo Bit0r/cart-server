@@ -7,13 +7,23 @@ try {
     $phone = login_verify();
 
     $db = connect_book_sc();
+
+    $db->beginTransaction();
+
+    $query =
+        'DELETE FROM shipping
+        WHERE phone = ?';
+    $stmt = $db->prepare($query);
+    $stmt->execute([$phone]);
+
     $markers = create_markers(7, count($shipping));
     $query =
-        "REPLACE shipping(phone, address_name, province, city, county, township, detail)
+        "INSERT shipping(phone, address_name, province, city, county, township, detail)
         VALUES $markers";
     $stmt = $db->prepare($query);
     $stmt->execute(create_params($shipping, $phone));
 
+    $db->commit();
     $response = create_response();
 } catch (\PDOException $th) {
     $response = create_response($th);

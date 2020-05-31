@@ -13,7 +13,7 @@ try {
         'SELECT
             books.isbn,
             title,
-            item_price,
+            item_price price,
             quantity,
             item_price * quantity total
         FROM

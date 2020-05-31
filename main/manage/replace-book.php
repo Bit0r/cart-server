@@ -2,10 +2,9 @@
 try {
     require_once '../../lib/book_sc_fns.php';
     json_header();
+    $book = json_input();
 
     admin_verify();
-
-    $book = json_input();
 
     $db = connect_book_sc();
 
