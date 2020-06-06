@@ -3,7 +3,10 @@ try {
     require_once '../../lib/book_sc_fns.php';
     json_header();
 
-    $phone = login_verify();
+    session_start();
+    if (empty($_SESSION['customer_phone']) && empty($_SESSION['admin_username'])) {
+        throw new Exception("请先登录", 1);
+    }
 
     $orderid = htmlspecialchars($_GET['orderid']);
 

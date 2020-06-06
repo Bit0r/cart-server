@@ -24,6 +24,7 @@ try {
                 orders
                     JOIN
                 shipping USING (phone , address_name)
+            ORDER BY orderid DESC
             LIMIT ?, ?';
         $stmt = $db->prepare($query);
         $stmt->execute([$page['offset'], $page['rowCount']]);
@@ -45,6 +46,7 @@ try {
                 shipping USING (phone , address_name)
             WHERE
                 status = ?
+            ORDER BY orderid DESC
             LIMIT ?, ?';
         $stmt = $db->prepare($query);
         $stmt->execute([
